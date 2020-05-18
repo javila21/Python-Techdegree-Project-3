@@ -49,7 +49,7 @@ class Game():
         
     def guess_input(self):
         try:
-            self.player_guess = input('Guess a letter: ').casefold()
+            self.player_guess = input('Guess a letter: ')
             Character(self.player_guess, self.phrase, life_check=False)
         except ValueError: 
             print("That was not a valid input. Please pick a number between 1 and 10")
