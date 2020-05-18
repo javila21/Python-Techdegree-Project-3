@@ -84,7 +84,7 @@ class Game():
     """End of Game Method with option to exit or play again"""    
     def end_of_game(self):
         try:
-            play_again = input("Would you like to play again?[y]es/[n]o: ")
+            play_again = input("Would you like to play again?[y]es/[n]o: ").lower()
         except ValueError:
             print("That is is not a valid value please use either y or n.")
             self.end_of_game()
