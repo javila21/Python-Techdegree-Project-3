@@ -19,7 +19,7 @@ class Phrase():
         if new_game is True:
             character_list.clear()
             consol_output.clear()
-        print(self.phrase)
+#        print(self.phrase)
     """Turns the phrase into a list characters"""           
     def charac_in_phrase(self):
         character_list = list(self.phrase)
