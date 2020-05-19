@@ -34,6 +34,6 @@ class Phrase():
                     consol_output[n] = "_"
         """adds corrects guesses to display output"""            
         for n, char in enumerate(character_list):
-            if char is self.player_guess:
+            if char == self.player_guess:
                 consol_output[n] = self.player_guess
                 

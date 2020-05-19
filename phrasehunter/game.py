@@ -60,7 +60,7 @@ class Game():
     """Input request for player with expections"""    
     def guess_input(self):
         try:
-            self.player_guess = input('Guess a letter: ')
+            self.player_guess = input('Guess a letter: ').lower()
             Character(self.player_guess, self.phrase)
         except ValueError: 
             print("That was not a valid input. Please pick a number between 1 and 10")
