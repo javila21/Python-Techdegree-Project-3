@@ -1,32 +1,27 @@
-import random
 import sys
 from phrase import Phrase
 from phrase import consol_output
 from character import Character
-"""List of phrases to be guessed in game"""
-phrase_list = ['keep your chin up', 'wild at heart', 'hello world', 'embrace the journey', 'be the change', 'focus and win', 'do it now', 'never give up']
-"""Sets lives for wrong guesses in game"""
-total_lives = 5
-"""Shuffles phrase_list for first run"""
-random.shuffle(phrase_list)
+
 class Game():
     
-    def __init__(self, whole_phrase=False,*args, **kwargs): 
+    def __init__(self,total_lives = 5, *args, **kwargs): 
+        self.total_lives = total_lives
         self.consol_output = consol_output
         """Sets the phrase for the games"""
-        self.phrase = phrase_list[1]
         self.player_guess = None
+        phrase = Phrase(self.player_guess)
+        self.phrase = phrase.phrases
+#        print(phrase_list[1])
         self.welcome_message()
         self.start_game()
         
     
     """Starts Game"""
     def start_game(self):
-        Phrase(phrase_list[1],self.player_guess, new_game=False, run_extend=True).charac_in_phrase()
-        """Shuffles phrase_list for additional playes after first run"""
-        random.shuffle(phrase_list)
+
         """Sets the number of guesses"""
-        used_lives = total_lives
+        used_lives = self.total_lives
         """Game loop"""
         while True:
             
@@ -35,7 +30,7 @@ class Game():
             if "_" not in self.consol_output:
                 self.you_won()   
             self.guess_input()
-            """Checks if guess input matches phrase in Character file and then counts down if                not correct
+            """Checks if guess input matches phrase in Character file and then counts down if not correct
 """
             true_guess = Character(self.player_guess, self.phrase)
             if true_guess.was_guessed is False:
@@ -44,7 +39,7 @@ class Game():
             if used_lives <= 0 :
                 self.better_luck()
                 """Output how many lives are left"""
-            print('You have {} out of {} lives remaining!'.format(used_lives,       total_lives))
+            print('You have {} out of {} lives remaining!'.format(used_lives,self.total_lives))
     """Welcome message Method"""    
     def welcome_message(self):
         print("Welcome to Phrase Hunter!")
@@ -54,7 +49,7 @@ class Game():
     """Output the phrase to be guessed against and adds correct guess to output"""
     def phrase_output(self, phrase):
         self.phrase = phrase
-        Phrase(phrase, self.player_guess, run_extend=False).charac_in_phrase()
+        Phrase(self.player_guess, run_extend=False)
         print('{}'.format(''.join(self.consol_output)))
         
     """Input request for player with expections"""    
@@ -67,7 +62,7 @@ class Game():
         if self.player_guess == "":
             print ("Please enter a letter,try again.")
         if not self.player_guess.isalpha(): 
-            print ("Please only enter a letters,try again.")
+            print ("Please only enter a letter(a-z),try again.")
         if len(self.player_guess) > 1:
             print("Please enter only one letter at a time.")
             
@@ -89,7 +84,7 @@ class Game():
             print("That is is not a valid value please use either y or n.")
             self.end_of_game()
         if play_again == "y":
-            Phrase(phrase_list[1], self.player_guess, new_game=True, run_extend=True)
+            Phrase(self.player_guess, new_game=True, run_extend=True)
             Character(self.player_guess, self.phrase, life_check=True, new_game=True)
             Game()
         elif play_again == "n":    
