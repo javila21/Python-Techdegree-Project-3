@@ -9,6 +9,7 @@ class Character():
         self.guess_check(player_guess, original)
     
     def guess_check(self, player_guess, original):
+        """Checks if player input is a match"""
         if re.search(player_guess, self.original):
             self.was_guessed = True
             

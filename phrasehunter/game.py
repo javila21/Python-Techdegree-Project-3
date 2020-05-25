@@ -1,3 +1,4 @@
+import random
 import sys
 from phrase import Phrase
 from phrase import consol_output
@@ -10,22 +11,22 @@ class Game():
         self.consol_output = consol_output
         """Sets the phrase for the games"""
         self.player_guess = None
-        phrase = Phrase(self.player_guess)
-        self.phrase = phrase.phrases
-#        print(phrase_list[1])
+        self.phrase_list = ['keep your chin up', 'wild at heart', 'hello world', 'embrace the journey', 'be the change', 'focus and win', 'do it now', 'never give up'
+        ]
+        self.list_of_phrases = [Phrase(item, self.player_guess ) for item in self.phrase_list]
+        self.selected_phrase = random.choice(self.list_of_phrases)
         self.welcome_message()
         self.start_game()
         
     
-    """Starts Game"""
     def start_game(self):
-
+        """Starts Game"""
         """Sets the number of guesses"""
         used_lives = self.total_lives
         """Game loop"""
         while True:
             
-            self.phrase_output(self.phrase)
+            self.phrase_output(self.selected_phrase)
             """If no "_" in output then game is won"""
             if "_" not in self.consol_output:
                 self.you_won()   
@@ -46,14 +47,15 @@ class Game():
         print("-----------------------------") 
         print("You get 5 lives, to guess the phrase.""\n""For each incorrect guess 1 life is lost. Good Luck!!!""\n")
         
-    """Output the phrase to be guessed against and adds correct guess to output"""
     def phrase_output(self, phrase):
+        """Output the phrase to be guessed against and adds correct guess to         output
+        """
         self.phrase = phrase
-        Phrase(self.player_guess, run_extend=False)
+        Phrase(self.selected_phrase, self.player_guess, run_extend=False)
         print('{}'.format(''.join(self.consol_output)))
         
-    """Input request for player with expections"""    
     def guess_input(self):
+        """Input request for player with expections"""    
         try:
             self.player_guess = input('Guess a letter: ').lower()
             Character(self.player_guess, self.phrase)
@@ -68,16 +70,17 @@ class Game():
             
     """Winning Message"""    
     def you_won(self):
+        """Winning Message""" 
         print("Congratualtions you won the Game!!!!")
         self.end_of_game()
         
-    """Losing Message"""    
     def better_luck(self):
+        """Losing Message""" 
         print("Better luck next time.")
         self.end_of_game()
         
-    """End of Game Method with option to exit or play again"""    
     def end_of_game(self):
+        """End of Game Method with option to exit or play again"""
         try:
             play_again = input("Would you like to play again?[y]es/[n]o: ").lower()
         except ValueError:
