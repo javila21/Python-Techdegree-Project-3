@@ -3,6 +3,5 @@
 from game import Game
 
 if __name__ == '__main__':
-    """Startsg Game function"""
+    """Starts Game function"""
     Game()
-    

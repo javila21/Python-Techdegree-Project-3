@@ -7,6 +7,7 @@ character_list = []
 """The phrase that the player sees"""
 consol_output = []
 
+
 class Phrase():
     def __init__(self,phrase, player_guess, new_game=False, run_extend=True, *args, **kwargs):
         self.phrase = str(phrase)
